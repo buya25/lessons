@@ -1,0 +1,295 @@
+# Lessons Repository — Project Notes
+
+## Website
+**Docusaurus + GitHub Pages**
+- Lessons are written as markdown files in `docs/` — the site builds itself from them
+- Hosted free on GitHub Pages, auto-updates on every push
+- Open source, no third-party accounts, we own everything
+- One repo = lessons + website, no syncing between two places
+
+---
+
+## Goal
+Build a structured, beginner-friendly programming lessons library across multiple languages.
+Each language has self-contained lessons + a real capstone project. Lessons are designed to be
+published on GitHub so students can follow along easily.
+
+**Target audience: complete beginners** — no prior programming experience assumed.
+
+---
+
+## Before Writing Any Lesson — Foundations
+
+### 1. Student Profile
+- Audience: **complete beginners**, zero experience assumed
+- Write as if explaining to someone who has never opened a code editor
+- Never assume they know what a terminal, variable, or function is without explaining it first
+- Use everyday analogies before introducing technical terms
+
+### 2. "Why This Lesson Exists" Statement
+Every single lesson file must open with one sentence:
+> *"After this lesson, you will be able to ___."*
+
+If you cannot fill that blank clearly and specifically, the lesson is not ready to write.
+This keeps lessons focused and tells students exactly what they are working toward.
+
+### 3. Shared Sandbox Environment
+Students must have a working setup **before lesson 1** — same tools, same versions, same editor.
+A broken environment kills motivation before learning even starts.
+
+Create a `setup/` folder at the root with:
+```
+setup/
+├── windows.md     ← step-by-step setup for Windows
+├── mac.md         ← step-by-step setup for Mac
+├── linux.md       ← step-by-step setup for Linux
+└── verify.md      ← how to confirm your setup is working
+```
+Each guide covers: install the language runtime, install VS Code, install extensions, run a
+"hello world" to confirm everything works. No lesson links should be shared until setup is done.
+
+### 4. Consistent Lesson Length — 20 Minutes
+Every lesson is designed to be completed in **~20 minutes**.
+- If a concept needs more time, split it into two lessons
+- This gives students a sense of progress and makes it easy to fit into a busy day
+- Each lesson README should say: `Estimated time: 20 minutes`
+
+### 5. "What Went Wrong" Culture — From Lesson 1
+The very first lesson must show an error on purpose. Goals:
+- Normalize error messages — beginners fear them, they shouldn't
+- Teach students to *read* errors, not panic and close the terminal
+- Every lesson's `notes.md` must include a **When Things Go Wrong** section:
+  - Show the exact error message they will see
+  - Explain what it means in plain English
+  - Show how to fix it step by step
+
+### 6. Naming and Numbering — Lock This In Before Publishing
+Once lessons are shared and bookmarked, renaming breaks student links and ruins trust.
+Decide now and never change it.
+
+**Folder naming rules:**
+```
+language/
+├── 01-lesson-name/       ← always two digits, lowercase, hyphens not spaces
+├── 02-next-lesson/
+├── 03-another-lesson/
+└── project-name/         ← capstone has no number prefix
+```
+
+**Rules:**
+- Two-digit prefix (`01-`, `02-`) so folders sort correctly up to 99 lessons
+- All lowercase, hyphens only — no spaces, no underscores, no capitals
+- Lesson name should describe what the student DOES, not what the concept IS
+  - Good: `03-build-your-first-function`
+  - Bad: `03-functions`
+- Never rename a published folder — add a new one if needed
+
+---
+
+## Core Principle: Learn → Build → Connect
+Every language track follows this pattern:
+1. Teach the language from scratch (fundamentals → advanced)
+2. Build a full project using that language
+3. Connect it to other tracks (e.g., Python backend + React frontend share the same database)
+
+---
+
+## Recommended Folder Structure
+
+```
+lessons/
+├── notes                        ← this file
+├── README.md                    ← overview of the entire repo (important for GitHub visitors)
+│
+├── database/
+│   ├── README.md
+│   ├── 01-intro-to-sql/
+│   ├── 02-tables-and-queries/
+│   ├── ...
+│   └── project-e-commerce-db/   ← capstone: full e-commerce database schema
+│
+├── python/
+│   ├── README.md
+│   ├── 01-basics/
+│   ├── 02-functions/
+│   ├── ...
+│   └── project-rest-api/        ← uses the shared database above
+│
+├── java/
+│   ├── README.md
+│   ├── 01-basics/
+│   └── project-inventory-system/
+│
+├── php/
+│   ├── README.md
+│   ├── 01-basics/
+│   └── project-blog-backend/
+│
+├── react/
+│   ├── README.md
+│   ├── 01-jsx-and-components/
+│   └── project-e-commerce-frontend/ ← consumes the Python API + shared database
+│
+├── nodejs/
+│   ├── README.md
+│   ├── 01-intro-to-node/
+│   └── project-realtime-chat/
+│
+└── _shared/
+    └── e-commerce-db-dump.sql   ← shared database reused across frontend/backend projects
+```
+
+---
+
+## Important Rules for Every Lesson Folder
+
+Each numbered lesson folder should contain:
+- `README.md` — what this lesson covers and what the student will learn
+- `code/` — working code examples
+- `exercises/` — practice tasks with solutions in a separate `solutions/` subfolder
+- `notes.md` — key concepts, gotchas, and tips
+
+---
+
+## Capstone Project Guidelines
+
+- Every language track must end with a real-world project, not a toy example
+- Projects should be interconnected where possible (same database, same API)
+- Projects must include a `README.md` with: setup steps, how to run, what it does
+- Include a `.env.example` (never commit real credentials)
+
+---
+
+## GitHub Presentation Tips
+
+- Root `README.md` should act as a course catalog — list every track with links
+- Use consistent naming: `01-`, `02-` prefixes so lessons sort correctly
+- Add badges or a progress table showing which tracks are complete vs. in-progress
+- Pin the repo and add topics: `education`, `programming`, `tutorial`, `beginner`
+
+---
+
+## Languages Planned
+
+- [ ] SQL / Database (start here — everything else depends on it)
+- [ ] Python
+- [ ] Java
+- [ ] PHP
+- [ ] React
+- [ ] Node.js
+- [ ] (future) TypeScript, Go, C#
+
+---
+
+## Making Lessons Engaging (Anti-Copy-Paste Strategy)
+
+### The Problem with Traditional Lessons
+When students can just copy code, they learn nothing. The goal is to make them *think*, *break things*,
+and *fix things* — that's what builds real understanding.
+
+### Lesson Structure That Forces Engagement
+
+Every lesson should follow this flow:
+
+```
+1. THE HOOK       — start with a relatable problem or a surprising result
+2. THE CONCEPT    — explain the idea, not the syntax
+3. LIVE EXAMPLE   — show working code, but with deliberate gaps to fill
+4. BREAK IT       — show what happens when it goes wrong (and why)
+5. FIX IT         — student fixes the broken version themselves
+6. BUILD ON IT    — small challenge that extends the example
+7. COMMON MISTAKES — a list of what real developers get wrong here
+```
+
+---
+
+### Techniques to Avoid Copy-Paste
+
+**1. Broken Code Exercises**
+Give students code with intentional bugs. They cannot copy-paste — they must read and understand.
+Example label: `// BUG: why does this crash? fix it before moving on`
+
+**2. Fill-in-the-Blank Code**
+Provide the structure, remove key parts. Student fills in the logic.
+```python
+def calculate_total(prices):
+    total = 0
+    for price in ___:       # what goes here?
+        total ___ price     # and here?
+    return ___
+```
+
+**3. Predict Before You Run**
+Before showing output, ask: *"What do you think this prints? Why?"*
+Force a guess, then run it. If they were wrong, that moment of surprise = learning.
+
+**4. "What Happens If..." Challenges**
+End each concept block with questions like:
+- What happens if you pass an empty list?
+- What happens if the value is negative?
+- What happens if you remove this line?
+Students must test it themselves — not google it.
+
+**5. Code Review Style (Good vs. Bad)**
+Show two versions side by side: the wrong way and the right way.
+Explain *why* one is better — performance, readability, security, maintenance.
+
+**6. Real Consequences**
+Always connect mistakes to real-world outcomes:
+- "This SQL mistake is how data leaks happen"
+- "This loop mistake crashed a production server at [Company X]"
+- "This is the exact bug that caused [relatable failure]"
+
+---
+
+### Common Mistakes Section (Required in Every Lesson)
+
+Each lesson's `notes.md` must include a **Common Mistakes** block:
+
+```markdown
+## Common Mistakes
+
+| Mistake | Why It Happens | How to Fix It |
+|---------|---------------|---------------|
+| ...     | ...           | ...           |
+```
+
+Examples by topic:
+- **SQL**: forgetting WHERE in UPDATE/DELETE (wipes entire table)
+- **Python**: mutable default arguments, off-by-one in loops
+- **React**: mutating state directly instead of using setState
+- **Node.js**: forgetting async/await, callback hell
+- **Java**: NullPointerException, not closing streams
+- **PHP**: SQL injection from raw user input passed directly to queries
+
+---
+
+### Things to Avoid in Lessons
+
+- Never give complete, runnable solutions before the student attempts the problem
+- Never use placeholder variable names like `foo`, `bar`, `x`, `temp` — use real names
+- Never explain syntax without showing a real use case
+- Never skip error messages — show them, explain them, normalize them
+- Never make exercises that have one obvious answer — ambiguity forces thinking
+
+---
+
+### Engagement Boosters
+
+- **Mini-challenges with a timer hint**: "This should take you ~10 minutes"
+- **"Extension" tasks**: optional harder versions for advanced students
+- **Checkpoints**: short 3-question quizzes before moving to the next lesson
+- **Progress markers**: students can check off lessons — gives a sense of momentum
+- **Relatable projects**: build things students actually want (a budget tracker,
+  a weather app, a todo list) before moving to the capstone
+
+---
+
+## Recommended Starting Order
+
+1. **Database first** — build the shared e-commerce schema used by all other projects
+2. **Python** — REST API that connects to the database
+3. **React** — frontend that calls the Python API
+4. **Node.js** — alternative backend, real-time features
+5. **PHP** — classic server-side, blog/CMS project
+6. **Java** — enterprise patterns, inventory/management system
